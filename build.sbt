@@ -1,4 +1,4 @@
-name := "strip-pii"
+name := "strip-sensitive-personal-info"
 
 version := "0.1"
 
