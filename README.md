@@ -5,6 +5,7 @@ https://en.wikipedia.org/wiki/Personally_identifiable_information
 
 
 ```
+git push --set-upstream origin HEAD
 sbt "release release-version 2.0 next-version 2.1-SNAPSHOT with-defaults"
 
 # with-defaults is required so that rest of the input for yes/no are
