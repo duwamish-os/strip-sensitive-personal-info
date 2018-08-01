@@ -13,6 +13,7 @@ import sbtrelease.ReleasePlugin.autoImport._
 import sbtrelease.Version
 
 import scala.sys.process.Process
+import ReleaseTransformations._
 
 val commitSha = Process("git rev-parse --short HEAD").lineStream.head
 
@@ -27,28 +28,26 @@ releaseVersion := ((version: String) => {
 
 import sbtrelease._
 
-releaseNextVersion := {
-  ver =>
-    val x = Version(ver).map(_.bump(releaseVersionBump.value).string.split("-").head).getOrElse(versionFormatError)
-    println("===========")
-    println("releaseNextVersion")
-    println(x)
-    println("releaseNextVersion")
-    println("===========")
-    x
-}
+//releaseNextVersion := {
+//  ver =>
+//    val x = Version(ver).map(_.bump(releaseVersionBump.value).string.split("-").head).getOrElse(versionFormatError)
+//    println("===========")
+//    println("releaseNextVersion")
+//    println(x)
+//    println("releaseNextVersion")
+//    println("===========")
+//    x
+//}
 
 releaseTagName := s"v${version.value}"
 
-import ReleaseTransformations._
-
 releaseProcess := Seq[ReleaseStep](
-  checkSnapshotDependencies,              // : ReleaseStep
-  inquireVersions,                        // : ReleaseStep
-  runClean,                               // : ReleaseStep
-  runTest,                                // : ReleaseStep
-  setReleaseVersion,                      // : ReleaseStep
-  tagRelease,                             // : ReleaseStep
-  publishArtifacts,                       // : ReleaseStep, checks whether `publishTo` is properly set up
-  pushChanges                             // : ReleaseStep, also checks that an upstream branch is properly configured
+  checkSnapshotDependencies,
+  inquireVersions,
+  runClean,
+  runTest,
+  setReleaseVersion,
+  tagRelease,
+  publishArtifacts,
+  pushChanges
 )
