@@ -18,6 +18,12 @@ import scala.sys.process.Process
 
 val commitSha = Process("git rev-parse --short HEAD").lineStream.head
 
-releaseVersion := ((version: String) => s"v${version}-${commitSha}")
+releaseVersion := ((version: String) => {
+  val ver = s"v${version}-${commitSha}"
+  println("===========")
+  println(ver)
+  println("===========")
+  ver
+})
 
 releaseTagName := s"v${version.value}-${commitSha}"
