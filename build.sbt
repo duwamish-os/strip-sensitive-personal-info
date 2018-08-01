@@ -19,7 +19,7 @@ import scala.sys.process.Process
 val commitSha = Process("git rev-parse --short HEAD").lineStream.head
 
 releaseVersion := ((version: String) => {
-  val ver = s"v${version}-${commitSha}"
+  val ver = s"${version}-${commitSha}"
   println("===========")
   println(ver)
   println("===========")
