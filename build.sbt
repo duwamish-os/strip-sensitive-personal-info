@@ -29,7 +29,10 @@ import sbtrelease._
 
 releaseNextVersion := {
   ver =>
-    val x = Version(ver).map(_.bump(releaseVersionBump.value).string).getOrElse(versionFormatError)
+    println(Version(ver))
+    println(Version(ver).map(_.bump(releaseVersionBump.value)))
+
+    val x = Version(ver).map(_.bump(releaseVersionBump.value).string.split("-").head).getOrElse(versionFormatError)
     println("===========")
     println("releaseNextVersion")
     println(x)
