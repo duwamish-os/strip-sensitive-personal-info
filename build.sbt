@@ -46,7 +46,7 @@ releaseProcess := Seq[ReleaseStep](
   inquireVersions,
   runClean,
   runTest,
-  setReleaseVersion,
+  //setReleaseVersion,
   tagRelease,
   publishArtifacts,
   //pushChanges
