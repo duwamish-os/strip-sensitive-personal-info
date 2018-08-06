@@ -22,7 +22,7 @@ publishTo := Some(Resolver.file("file", new File(Path.userHome.absolutePath + "/
 
 lazy val appVersion = "1.0.0"
 
-def appendCommitSha(out: sbtdynver.GitDescribeOutput): String = {
+def formatVersion(out: sbtdynver.GitDescribeOutput): String = {
   val dirtySuffix = out.dirtySuffix.dropPlus.mkString("-", "").split("-").head
   println("""-------""")
   println(out.dirtySuffix)
@@ -37,9 +37,9 @@ def appendCommitSha(out: sbtdynver.GitDescribeOutput): String = {
 def fallbackVersion(d: java.util.Date): String = s"HEAD-${sbtdynver.DynVer timestamp d}"
 
 inThisBuild(List(
-  version := dynverGitDescribeOutput.value.mkVersion(appendCommitSha, fallbackVersion(dynverCurrentDate.value)),
+  version := dynverGitDescribeOutput.value.mkVersion(formatVersion, fallbackVersion(dynverCurrentDate.value)),
   dynver := {
     val date = new java.util.Date
-    sbtdynver.DynVer.getGitDescribeOutput(date).mkVersion(appendCommitSha, fallbackVersion(date))
+    sbtdynver.DynVer.getGitDescribeOutput(date).mkVersion(formatVersion, fallbackVersion(date))
   }
 ))
