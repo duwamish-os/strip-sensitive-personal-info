@@ -9,4 +9,16 @@ libraryDependencies ++= Seq(
   "org.scalatest" %% "scalatest" % "3.0.5" % Test
 )
 
-publishTo := Some(Resolver.mavenLocal)
+isSnapshot in ThisBuild := false
+
+publishTo := {
+  println("====================")
+  println(isSnapshot.value)
+  println("====================")
+  if (isSnapshot.value) {
+    Some(Resolver.mavenLocal)
+  }
+  else {
+    Some(Resolver.mavenLocal)
+  }
+}
